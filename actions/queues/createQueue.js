@@ -1,4 +1,4 @@
-import * as aws from '../config/aws.conf'
+import * as aws from '../../config/aws.conf'
 
 export async function createQueueAndGetURL(queueName) {
 
@@ -21,7 +21,7 @@ export async function createQueueAndGetURL(queueName) {
       )
       .catch(
         (err) => {
-          resolve(err)
+          resolve(err) //resolve into re-usable value test validation rather than rejecting and stopping the process
           // reject(err)
         }
       )

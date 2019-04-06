@@ -1,16 +1,16 @@
 import 'chai/register-should';
-import { sendMessageAndGetResponse } from '../actions/sendMessage'
-import { createQueueAndGetURL } from '../actions/createQueue'
-import { receiveMessage, getMessageBody } from '../actions/receiveMessage'
-import * as common from '../util/common'
+import { sendMessageAndGetResponse } from '../../actions/messages/sendMessage'
+import { createQueueAndGetURL } from '../../actions/queues/createQueue'
+import { receiveMessage, getMessageBody } from '../../actions/messages/receiveMessage'
+import * as common from '../../util/common'
 
-var queueUrl, messageResponse, messageId, randomURL
+var queueUrl, messageResponse, messageId, queueName
 const messageBody = common.generateRandomMessage()
 
 describe('Tests for Receive Message Functionality', async () => {
   before('Send Message to an Existing Queue', async () => {
-    randomURL = common.generateRandomString()
-    queueUrl = await createQueueAndGetURL(randomURL)
+    queueName = common.generateRandomString()
+    queueUrl = await createQueueAndGetURL(queueName)
     messageResponse = await sendMessageAndGetResponse(queueUrl, messageBody)
     messageId = messageResponse.MessageId
   })
@@ -21,7 +21,6 @@ describe('Tests for Receive Message Functionality', async () => {
 
     receivedMsgs.should.be.an('array')
     messageBody.should.equal(expectedMsgBody)
-
   })
 
   it('Should throw error when MessageURL is not sent in ReceiveMessage parameters', async () => {

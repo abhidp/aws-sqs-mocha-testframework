@@ -1,4 +1,4 @@
-const aws = require('../config/aws.conf')
+const aws = require('../../config/aws.conf')
 
 // var queueURL = aws.endpoint + '/queue/mqelastic'
 
@@ -34,7 +34,7 @@ export async function receiveMessage(QueueUrl) {
       )
       .catch(
         function (err) {
-          resolve(err)
+          resolve(err) //resolve into re-usable value test validation rather than rejecting and stopping the process
           // reject(err)
         }
       )

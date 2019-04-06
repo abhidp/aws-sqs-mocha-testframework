@@ -1,4 +1,4 @@
-const aws = require('../config/aws.conf')
+const aws = require('../../config/aws.conf')
 
 var queueURL = 'http://localhost:9324/queue/mqelastic'
 
@@ -20,13 +20,13 @@ async function deleteParams() {
     deleteMsgPromise
       .then(
         function (data) {
-          console.log("Message Deleted", data);
+          console.log('Message Deleted', data);
           resolve(data)
         }
       )
       .catch(
         function (err) {
-          console.log("Delete Error", err)
+          console.log('Delete Error', err)
           reject(err)
         }
       )

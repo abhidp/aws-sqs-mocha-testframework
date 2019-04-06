@@ -1,16 +1,18 @@
-import 'chai/register-should';
-import { sendMessageAndGetResponse } from '../actions/sendMessage'
-import { createQueueAndGetURL } from '../actions/createQueue'
+import 'chai/register-should'
+import * as common from '../../util/common'
+import { sendMessageAndGetResponse } from '../../actions/messages/sendMessage'
+import { createQueueAndGetURL } from '../../actions/queues/createQueue'
 
 var queueUrl, msgResponseErr
-const messageBody = 'I am the road warrior'
+const messageBody = common.generateRandomMessage()
 
 describe('Tests for Send Message Functionality', async () => {
-  before('Create Queue to Send Message to', async () => {
-    queueUrl = await createQueueAndGetURL('madmax')
+  before('Create a Queue to Send Message to', async () => {
+    const queueName = common.generateRandomString()
+    queueUrl = await createQueueAndGetURL(queueName)
   })
 
-  it('Should return a valid response upon successful Sending Message', async () => {
+  it('Should return a valid response upon SUCCESSful Sending Message', async () => {
     const msgResponse = await sendMessageAndGetResponse(queueUrl, messageBody)
 
     msgResponse.should.be.an('object')
@@ -22,14 +24,14 @@ describe('Tests for Send Message Functionality', async () => {
     )
   })
 
-  it('Should throw Error when MessageBody is missing', async () => {
+  it('Should FAIL when MessageBody is missing', async () => {
     msgResponseErr = await sendMessageAndGetResponse(queueUrl, undefined)
 
     msgResponseErr.message.should.equal(`Missing required key 'MessageBody' in params`)
     msgResponseErr.code.should.equal('MissingRequiredParameter')
   })
 
-  it('Should throw error when MessageURL is not sent in parameters', async () => {
+  it('Should FAIL when MessageURL is not sent in parameters', async () => {
     msgResponseErr = await sendMessageAndGetResponse(undefined, messageBody)
 
     msgResponseErr.message.should.equal(`Missing required key 'QueueUrl' in params`)

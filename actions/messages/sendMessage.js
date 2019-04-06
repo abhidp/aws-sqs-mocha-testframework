@@ -1,4 +1,4 @@
-import * as aws from '../config/aws.conf'
+import * as aws from '../../config/aws.conf'
 
 export async function sendMessageAndGetResponse(queueURL, messageBody) {
 
@@ -19,7 +19,7 @@ export async function sendMessageAndGetResponse(queueURL, messageBody) {
       )
       .catch(
         (err) => {
-          resolve(err)
+          resolve(err) //resolve into re-usable value test validation rather than rejecting and stopping the process
           // reject(err)
         }
       )
