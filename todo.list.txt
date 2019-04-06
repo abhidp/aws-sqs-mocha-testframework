@@ -1,0 +1,6 @@
+Create Test cases for sending, receiving and deleting multiple messages 
+Create Testcases for listing, deleting Queues
+Create Tescases for multiple combinations of negative scenarios
+TearDown: Delete Message Queues that were created during each Testcase
+Only Validated MessageBody in ReceiveMessage test, should also validate MessageAttributes
+Validate other parameters in API calls such as DelaySeconds, VisibilityTimeout, WaitTimeSeconds
