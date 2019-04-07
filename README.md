@@ -1,7 +1,9 @@
 # aws-sqs-mocha-testframework
 
-End-to-End Tests for Amazon AWS SQS written in JavaScript ES6 Mocha framework using Chai Assertion library.
-Tests are created against an SQS mock-server called [ElasticMQ](https://github.com/softwaremill/elasticmq)
+End-to-End Tests for AWS-SQS written in JavaScript ES6 using Mocha test framework and Chai assertion library.
+Tests are created against an Amazon SQS-compatible mock-server called [ElasticMQ](https://github.com/softwaremill/elasticmq)
+
+>Note: The framework has not been tested against real AWS-SQS Cloud Service. Minor modifications in configuration are needed for tests to run against the real Service.
 
 
 #### Pre-Reqs:
