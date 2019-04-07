@@ -14,7 +14,7 @@
   "devDependencies": {
     "aws-sdk": "^2.303.0",
     "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-preset-latest": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "dotenv": "^6.0.0",
