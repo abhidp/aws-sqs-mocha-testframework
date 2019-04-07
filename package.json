@@ -9,7 +9,7 @@
   "scripts": {
     "api": "node_modules/.bin/mocha ./specs/**/*.spec.js --opts config/mocha.opts --reporter mochawesome"
   },
-  "author": "Abhi",
+  "author": "abhi358@gmail.com",
   "license": "ISC",
   "devDependencies": {
     "aws-sdk": "^2.303.0",

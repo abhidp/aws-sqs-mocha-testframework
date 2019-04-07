@@ -1,9 +1,13 @@
-require('dotenv').config()
-const AWS = require('aws-sdk')
-const awsCredentials = new AWS.Credentials(process.env.AWS_ACCESS_KEY_ID, process.env.AWS_SECRET_ACCESS_KEY)
-export const endpoint = process.env.ENDPOINT
+import { SQS, Credentials } from 'aws-sdk'
 
-export const sqs = new AWS.SQS({
+const awsCredentials = new Credentials(
+  process.env.AWS_ACCESS_KEY_ID,
+  process.env.AWS_SECRET_ACCESS_KEY
+)
+
+export const endpoint = process.env.endpoint
+
+export const sqs = new SQS({
   apiVersion: process.env.AWS_API_VERSION,
   credentials: awsCredentials,
   region: process.env.AWS_REGION,
