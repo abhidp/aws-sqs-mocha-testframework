@@ -1,11 +1,14 @@
 import * as aws from '../../config/aws.conf'
 
 export async function deleteMessage(queueURL, receiptHandle) {
+  // console.log('INSIDE Delete MESSAGE==', receiptHandle)
 
   var deleteParams = {
     QueueUrl: queueURL,
     ReceiptHandle: receiptHandle
   }
+
+  console.log('INSIDE Delete MESSAGE deleteParams==', deleteParams)
 
   var deleteMsgPromise = aws.sqs.deleteMessage(deleteParams).promise()
 
@@ -14,6 +17,7 @@ export async function deleteMessage(queueURL, receiptHandle) {
     deleteMsgPromise
       .then(
         function (data) {
+          console.log('DeleteMessage==', data)
           resolve(data)
         }
       )

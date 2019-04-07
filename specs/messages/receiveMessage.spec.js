@@ -1,7 +1,7 @@
 import 'chai/register-should';
 import { sendMessageAndGetResponse } from '../../actions/messages/sendMessage'
 import { createQueueAndGetURL } from '../../actions/queues/createQueue'
-import { receiveMessage, getMessageBody } from '../../actions/messages/receiveMessage'
+import { receiveMessage, getMessage } from '../../actions/messages/receiveMessage'
 import * as common from '../../util/common'
 
 var queueUrl, messageResponse, messageId, queueName
@@ -17,10 +17,10 @@ describe('Tests for Receive Message Functionality', async () => {
 
   it('Should receive the exact message in the Response Body as sent', async () => {
     const receivedMsgs = await receiveMessage(queueUrl)
-    const expectedMsgBody = await getMessageBody(receivedMsgs, messageId)
+    const expectedMessage = await getMessage(receivedMsgs, messageId)
 
     receivedMsgs.should.be.an('array')
-    messageBody.should.equal(expectedMsgBody)
+    messageBody.should.equal(expectedMessage.Body)
   })
 
   it('Should throw error when MessageURL is not sent in ReceiveMessage parameters', async () => {

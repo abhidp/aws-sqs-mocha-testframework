@@ -10,7 +10,7 @@ export async function receiveMessage(QueueUrl) {
       'All'
     ],
     QueueUrl: QueueUrl,
-    VisibilityTimeout: 0,
+    VisibilityTimeout: 1,
     WaitTimeSeconds: 0
   }
   // Create a promise on ReceiveMessage service object

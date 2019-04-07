@@ -8,7 +8,8 @@ const messageBody = common.generateRandomMessage()
 
 describe('Tests for Send Message Functionality', async () => {
   before('Create a Queue to Send Message to', async () => {
-    const queueName = common.generateRandomString()
+    // const queueName = common.generateRandomString()
+    const queueName = 'local'
     queueUrl = await createQueueAndGetURL(queueName)
   })
 
