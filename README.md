@@ -29,11 +29,5 @@ yarn install
 
 * View Test Report - open `sqs-test-report.html` present under `test-reports` folder
 
-![](extras/instructions.gif)
-
-
-
-
-
-
+![](https://i.imgur.com/c1PwqH1.gif)
 
