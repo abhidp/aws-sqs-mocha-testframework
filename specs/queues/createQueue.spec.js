@@ -6,7 +6,7 @@ import { createQueueAndGetURL } from '../../actions/queues/createQueue'
 describe('Tests for Creating a Message Queue', async () => {
 
   it('Should return a SUCCESSful response for valid Queue creation Request', async () => {
-    const queueName = common.generateRandomString() //generate a random name everytime to avoid  "Queue Already Exists Error"
+    const queueName = 'testqueue' + common.generateRandomString() //generate a random name everytime to avoid  "Queue Already Exists Error"
     const queueURL = await createQueueAndGetURL(queueName)
     const expectedQueueURL = aws.endpoint + '/queue/' + queueName
 
