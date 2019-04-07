@@ -7,3 +7,4 @@
 7.) Maintain all Err Messages, Err Codes and other Err Attributes in a separate json file rather than
     hardcoding in the testcase. This will help in easy maintainability in future if the ErrMessage changes
 8.) Test message Polling
+9.) Test against actual AWS-SQS Cloud Service

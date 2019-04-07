@@ -6,7 +6,7 @@ import { createQueueAndGetURL } from '../../actions/queues/createQueue'
 var queueUrl, msgResponseErr
 const messageBody = 'Message Body ' + common.generateRandomMessage()
 
-describe('Tests for Send Message Functionality', async () => {
+describe('Tests for SEND', async () => {
   before('Create a Queue to Send Message to', async () => {
     const queueName = 'testqueue' + common.generateRandomString()
     queueUrl = await createQueueAndGetURL(queueName)

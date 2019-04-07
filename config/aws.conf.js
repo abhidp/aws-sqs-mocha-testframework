@@ -5,7 +5,7 @@ const awsCredentials = new Credentials(
   process.env.AWS_SECRET_ACCESS_KEY
 )
 
-export const endpoint = process.env.endpoint
+export const endpoint = process.env.ENDPOINT
 
 export const sqs = new SQS({
   apiVersion: process.env.AWS_API_VERSION,

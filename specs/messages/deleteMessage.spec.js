@@ -8,7 +8,7 @@ import * as common from '../../util/common'
 var queueUrl, messageResponse, messageId, queueName, receivedMsgsList, getMsgDetails, receiptHandle
 const messageBody = 'Test Message Body ' + common.generateRandomMessage()
 
-describe('Tests for Receive Message Functionality', async () => {
+describe('Tests for DELETE Message', async () => {
   before('Send Message to an Existing Queue', async () => {
     queueName = 'testqueue' + common.generateRandomString()
     queueUrl = await createQueueAndGetURL(queueName)
