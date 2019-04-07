@@ -1,6 +1,4 @@
-const aws = require('../../config/aws.conf')
-
-// var queueURL = aws.endpoint + '/queue/mqelastic'
+import * as aws from '../../config/aws.conf'
 
 export async function receiveMessage(QueueUrl) {
   var params = {
@@ -41,12 +39,11 @@ export async function receiveMessage(QueueUrl) {
   })
 }
 
-
-export async function getMessageBody(receivedMsgs, messageId) {
+export async function getMessage(receivedMsgs, messageId) {
   const length = receivedMsgs.length
   for (let i = 0; i < length; i++) {
     if (receivedMsgs[i].MessageId === messageId) {
-      return receivedMsgs[i].Body
+      return receivedMsgs[i]
     }
   }
 }

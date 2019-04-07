@@ -7,7 +7,7 @@
     "url": "https://github.com/abhimassive/aws-sqs-mocha-testframework"
   },
   "scripts": {
-    "api": "node_modules/.bin/mocha ./specs/**/*.spec.js --opts config/mocha.opts --reporter mochawesome"
+    "api": "node_modules/.bin/mocha ./specs/**/deleteMessage.spec.js --opts config/mocha.opts --reporter mochawesome"
   },
   "author": "Abhi",
   "license": "ISC",

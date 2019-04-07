@@ -1,3 +1,4 @@
 node_modules
 .env
 mochawesome-report
+yarn.lock
