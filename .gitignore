@@ -3,3 +3,4 @@ node_modules
 mochawesome-report
 yarn.lock
 package-lock.json
+test-reports

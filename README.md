@@ -18,11 +18,14 @@ git clone https://github.com/abhimassive/aws-sqs-mocha-testframework.git &&
 cd aws-sqs-mocha-testframework && 
 yarn install
 ```
-* Start ElasticMQ server
 
-* Run Test `yarn run api`
+* Create a `.env` file at the root of the directory and populate values taking `.env_sample` as a reference
+  
+* Start ElasticMQ server (refer their repo link above)
 
-* View Report - open `mochawesome.html` present under 
+* Run TestSuite -  `yarn run apitests`
+
+* View Test Report - open `sqs-test-report.html` present under `test-reports` folder
 
 
 
