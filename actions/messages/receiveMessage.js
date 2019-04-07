@@ -1,6 +1,6 @@
 import * as aws from '../../config/aws.conf'
 
-export async function receiveMessage(QueueUrl) {
+export async function getAllMessagesFromQueue(queueUrl) {
   var params = {
     AttributeNames: [
       'SentTimestamp'
@@ -9,8 +9,8 @@ export async function receiveMessage(QueueUrl) {
     MessageAttributeNames: [
       'All'
     ],
-    QueueUrl: QueueUrl,
-    VisibilityTimeout: 1,
+    QueueUrl: queueUrl,
+    VisibilityTimeout: 0,
     WaitTimeSeconds: 0
   }
   // Create a promise on ReceiveMessage service object
@@ -22,14 +22,11 @@ export async function receiveMessage(QueueUrl) {
       .then(
         function (data) {
           if (data.Messages === undefined) {
-            console.log('No Messages in the Queue')
+            resolve('No Messages In Queue')
           } else {
-            // console.log('data.Messages==', data.Messages)
-            // receiptHandle = data.Messages[0].ReceiptHandle
             resolve(data.Messages)
           }
-        }
-      )
+        })
       .catch(
         function (err) {
           resolve(err) //resolve into re-usable value test validation rather than rejecting and stopping the process
@@ -39,10 +36,12 @@ export async function receiveMessage(QueueUrl) {
   })
 }
 
-export async function getMessage(receivedMsgs, messageId) {
+export async function getMessageById(receivedMsgs, messageId) {
   const length = receivedMsgs.length
+
   for (let i = 0; i < length; i++) {
     if (receivedMsgs[i].MessageId === messageId) {
+      // console.log('receivedMsgs[i]', receivedMsgs[i])
       return receivedMsgs[i]
     }
   }

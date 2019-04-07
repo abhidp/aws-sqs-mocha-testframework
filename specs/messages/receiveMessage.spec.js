@@ -1,31 +1,32 @@
 import 'chai/register-should';
 import { sendMessageAndGetResponse } from '../../actions/messages/sendMessage'
 import { createQueueAndGetURL } from '../../actions/queues/createQueue'
-import { receiveMessage, getMessage } from '../../actions/messages/receiveMessage'
+import { getAllMessagesFromQueue, getMessageById } from '../../actions/messages/receiveMessage'
 import * as common from '../../util/common'
 
 var queueUrl, messageResponse, messageId, queueName
-const messageBody = common.generateRandomMessage()
+const messageBody = 'Message Body ' + common.generateRandomMessage()
 
 describe('Tests for Receive Message Functionality', async () => {
   before('Send Message to an Existing Queue', async () => {
-    queueName = common.generateRandomString()
+    queueName = 'testqueue' + common.generateRandomString()
     queueUrl = await createQueueAndGetURL(queueName)
     messageResponse = await sendMessageAndGetResponse(queueUrl, messageBody)
     messageId = messageResponse.MessageId
   })
 
-  it('Should receive the exact message in the Response Body as sent', async () => {
-    const receivedMsgs = await receiveMessage(queueUrl)
-    const expectedMessage = await getMessage(receivedMsgs, messageId)
+  it('Should SUCCESSfully receive the sent message', async () => {
+    const receivedMsgsList = await getAllMessagesFromQueue(queueUrl)
+    const expectedMessage = await getMessageById(receivedMsgsList, messageId)
 
-    receivedMsgs.should.be.an('array')
+    receivedMsgsList.should.be.an('array')
     messageBody.should.equal(expectedMessage.Body)
   })
 
-  it('Should throw error when MessageURL is not sent in ReceiveMessage parameters', async () => {
-    const receivedMsgErr = await receiveMessage(undefined)
+  it('Should FAIL when MessageURL is not sent in ReceiveMessage parameters', async () => {
+    const receivedMsgErr = await getAllMessagesFromQueue(undefined)
 
     receivedMsgErr.message.should.equal(`Missing required key 'QueueUrl' in params`)
+    receivedMsgErr.code.should.equal('MissingRequiredParameter')
   })
 })

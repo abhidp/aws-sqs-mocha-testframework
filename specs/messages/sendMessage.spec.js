@@ -4,12 +4,11 @@ import { sendMessageAndGetResponse } from '../../actions/messages/sendMessage'
 import { createQueueAndGetURL } from '../../actions/queues/createQueue'
 
 var queueUrl, msgResponseErr
-const messageBody = common.generateRandomMessage()
+const messageBody = 'Message Body ' + common.generateRandomMessage()
 
 describe('Tests for Send Message Functionality', async () => {
   before('Create a Queue to Send Message to', async () => {
-    // const queueName = common.generateRandomString()
-    const queueName = 'local'
+    const queueName = 'testqueue' + common.generateRandomString()
     queueUrl = await createQueueAndGetURL(queueName)
   })
 

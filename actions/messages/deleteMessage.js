@@ -8,8 +8,6 @@ export async function deleteMessage(queueURL, receiptHandle) {
     ReceiptHandle: receiptHandle
   }
 
-  console.log('INSIDE Delete MESSAGE deleteParams==', deleteParams)
-
   var deleteMsgPromise = aws.sqs.deleteMessage(deleteParams).promise()
 
   return new Promise((resolve, reject) => {
@@ -17,13 +15,13 @@ export async function deleteMessage(queueURL, receiptHandle) {
     deleteMsgPromise
       .then(
         function (data) {
-          console.log('DeleteMessage==', data)
+          // console.log('DeleteMessage==', data)
           resolve(data)
         }
       )
       .catch(
         function (err) {
-          console.log('Delete Error', err)
+          // console.log('Delete Error', err)
           resolve(err)
           // reject(err)
         }

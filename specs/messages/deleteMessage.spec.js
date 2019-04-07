@@ -1,43 +1,38 @@
-import 'chai/register-should';
+import { expect } from 'chai'
 import { sendMessageAndGetResponse } from '../../actions/messages/sendMessage'
 import { createQueueAndGetURL } from '../../actions/queues/createQueue'
-import { receiveMessage, getMessage } from '../../actions/messages/receiveMessage'
+import { getAllMessagesFromQueue, getMessageById } from '../../actions/messages/receiveMessage'
 import { deleteMessage } from '../../actions/messages/deleteMessage'
 import * as common from '../../util/common'
 
-var queueUrl, messageResponse, messageId, queueName, receivedMsgsList, getMsgDetails
+var queueUrl, messageResponse, messageId, queueName, receivedMsgsList, getMsgDetails, receiptHandle
 const messageBody = 'Test Message Body ' + common.generateRandomMessage()
 
 describe('Tests for Receive Message Functionality', async () => {
   before('Send Message to an Existing Queue', async () => {
-    // queueName = 'testqueue' + common.generateRandomString()
-    queueUrl = await createQueueAndGetURL('local')
+    queueName = 'testqueue' + common.generateRandomString()
+    queueUrl = await createQueueAndGetURL(queueName)
     messageResponse = await sendMessageAndGetResponse(queueUrl, messageBody)
     messageId = messageResponse.MessageId
-    receivedMsgsList = await receiveMessage(queueUrl)
-    getMsgDetails = await getMessage(receivedMsgsList, messageId)
-    console.log('BEFORE MESSAGE===', getMsgDetails)
-    console.log('BEFORE receiptHandle===', getMsgDetails.ReceiptHandle)
+    receivedMsgsList = await getAllMessagesFromQueue(queueUrl)
 
+    getMsgDetails = await getMessageById(receivedMsgsList, messageId)
+    receiptHandle = getMsgDetails.ReceiptHandle
   })
 
   it('Should SUCCESSfully delete a Message', async () => {
-    const receiptHandle = getMsgDetails.ReceiptHandle
-    console.log('AFTER receiptHandle===', receiptHandle)
+    await deleteMessage(queueUrl, receiptHandle)
+    const msgListAfteDeletion = await getAllMessagesFromQueue(queueUrl)
+    const msgAfterDeletion = await getMessageById(msgListAfteDeletion, messageId)
 
-    // await deleteMessage(queueUrl, receiptHandle)
-    // console.log('delMsg==', delMsg)
-    // await delay(10000)
-    getMsgDetails = await getMessage(receivedMsgsList, messageId)
-    console.log('AFTER MESSAGE===', getMsgDetails)
-
-
+    expect(msgAfterDeletion).to.be.undefined
   })
 
-  async function delay(amount) {
-    return new Promise((resolve) => {
-      setTimeout(resolve, amount);
-    })
-  }
+  it('Should FAIL when requested to Delete withou ReceiptHandle', async () => {
+    const deleteWithoutReceiptHandle = await deleteMessage(queueUrl, undefined)
+
+    expect(deleteWithoutReceiptHandle.message).to.equal(`Missing required key 'ReceiptHandle' in params`)
+    expect(deleteWithoutReceiptHandle.code).to.equal('MissingRequiredParameter')
+  })
 
 })
