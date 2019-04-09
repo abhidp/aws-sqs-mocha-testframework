@@ -19,12 +19,12 @@ Tests are created against an Amazon SQS-compatible mock-server called [ElasticMQ
 git clone https://github.com/abhimassive/aws-sqs-mocha-testframework.git && 
 cd aws-sqs-mocha-testframework && 
 yarn install
+
 ```
+* Start ElasticMQ server and get its local server address/port (refer their repo link above)
 
-* Create a `.env` file at the root of the directory and populate values taking `.env_sample` as a reference
+* Create a `.env` file at the root of this repo and populate the values taking `.env_sample` as a reference 
   
-* Start ElasticMQ server (refer their repo link above)
-
 * Run TestSuite -  `yarn run apitests`
 
 * View Test Report - open `sqs-test-report.html` present under `test-reports` folder
